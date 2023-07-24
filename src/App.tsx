@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Layout, Row, Col, Alert } from 'antd'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import RoutesTable from './components/RoutesTable'
+import RoutesMap from './components/RoutesMap'
+import { useSelector } from 'react-redux'
+import { getError } from './store/slice'
+
+const CONTENT_STYLE: React.CSSProperties = {
+  minHeight: '100vh',
+  minWidth: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 }
 
-export default App;
+const { Content } = Layout
+
+function App() {
+  const error = useSelector(getError)
+
+  return (
+    <Layout>
+      <Content style={CONTENT_STYLE}>
+        {!error ? (
+          <Row gutter={16}>
+            <Col>
+              <RoutesTable />
+            </Col>
+            <Col>
+              <RoutesMap />
+            </Col>
+          </Row>
+        ) : (
+          <Alert message={error} type='error' showIcon />
+        )}
+      </Content>
+    </Layout>
+  )
+}
+
+export default App

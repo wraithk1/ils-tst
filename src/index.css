@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* custom */
+.active-row {
+  background-color: lightblue;
+}
+
+.ant-table-row:hover {
+  cursor: pointer;
+}
+
+.ant-table-cell-row-hover {
+  background-color: initial !important;
+}
